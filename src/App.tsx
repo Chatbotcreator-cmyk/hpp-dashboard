@@ -5,7 +5,7 @@ import {
   Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, 
   TableHead, TableRow, Chip, Box, Stack, TextField, IconButton, Collapse, 
   Button, Dialog, DialogTitle, DialogContent, DialogActions, MenuItem, 
-  Select, FormControl, Card, CardContent, InputAdornment
+  Select, FormControl, Card, CardContent, InputAdornment 
 } from '@mui/material';
 import { CSVLink } from 'react-csv';
 import FactoryIcon from '@mui/icons-material/Factory';
@@ -16,6 +16,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import SearchIcon from '@mui/icons-material/Search';
 import BoltIcon from '@mui/icons-material/Bolt';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function App() {
   const qc = useQueryClient();
@@ -46,7 +47,7 @@ export default function App() {
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa', minHeight: '100vh', width: '100vw' }}>
-      {/* BLUE NAVBAR - Matches your screenshot */}
+      {/* HEADER SECTION */}
       <Box sx={{ bgcolor: '#1a237e', color: 'white', p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <FactoryIcon />
@@ -59,18 +60,18 @@ export default function App() {
             placeholder='Search plants...' 
             onChange={(e) => setQ(e.target.value)} 
             sx={{ bgcolor: 'white', borderRadius: 1, width: 300 }}
-            InputProps={{ endAdornment: <SearchIcon color="action" /> }}
+            InputProps={{ endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment> }}
           />
           <IconButton color='inherit' onClick={() => setF(!f)}><FilterListIcon /></IconButton>
         </Stack>
       </Box>
 
       <Container sx={{ mt: 4 }} maxWidth={false}>
-        {/* KPI CARDS - Matches your screenshot style */}
+        {/* KPI CARDS - With the Water Drop and Bolt icons */}
         <Stack direction="row" spacing={3} sx={{ mb: 4 }}>
-          <Card sx={{ minWidth: 280, borderRadius: 2, boxShadow: 1 }}>
+          <Card sx={{ minWidth: 300, borderRadius: 2 }}>
             <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Box sx={{ bgcolor: '#e8eaf6', p: 1, borderRadius: 2 }}><BoltIcon color="primary" /></Box>
+              <Box sx={{ bgcolor: '#e8eaf6', p: 2, borderRadius: '50%' }}><BoltIcon color="primary" /></Box>
               <Box>
                 <Typography color="textSecondary" variant="caption" sx={{ fontWeight: 'bold' }}>TOTAL GENERATION CAPACITY</Typography>
                 <Typography variant="h4" sx={{ fontWeight: 800 }}>{totalCap.toFixed(1)} <Typography component="span" variant="h6">MW</Typography></Typography>
@@ -78,9 +79,9 @@ export default function App() {
             </CardContent>
           </Card>
 
-          <Card sx={{ minWidth: 280, borderRadius: 2, boxShadow: 1 }}>
+          <Card sx={{ minWidth: 300, borderRadius: 2 }}>
             <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Box sx={{ bgcolor: '#e8f5e9', p: 1, borderRadius: 2 }}><WaterDropIcon sx={{ color: '#2e7d32' }} /></Box>
+              <Box sx={{ bgcolor: '#e8f5e9', p: 2, borderRadius: '50%' }}><WaterDropIcon sx={{ color: '#2e7d32' }} /></Box>
               <Box>
                 <Typography color="textSecondary" variant="caption" sx={{ fontWeight: 'bold' }}>OPERATIONAL STATUS</Typography>
                 <Typography variant="h4" sx={{ fontWeight: 800 }}>{activeCount} <Typography component="span" variant="h6">Active Units</Typography></Typography>
@@ -90,18 +91,18 @@ export default function App() {
         </Stack>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#333' }}>Asset Inventory ({filtered.length})</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Asset Inventory ({filtered.length})</Typography>
           <Stack direction="row" spacing={1}>
              <CSVLink data={filtered} filename='hpp_report.csv' style={{ textDecoration: 'none' }}>
                 <Button size="small" variant='outlined' startIcon={<DownloadIcon />}>Export CSV</Button>
              </CSVLink>
-             <Button size="small" variant='contained' color="primary" startIcon={<AddIcon />} onClick={() => setO(true)}>Add Asset</Button>
+             <Button size="small" variant='contained' startIcon={<AddIcon />} onClick={() => setO(true)}>Add Asset</Button>
           </Stack>
         </Box>
 
         <Collapse in={f}>
-          <Paper sx={{ p: 2, mb: 2, borderLeft: '4px solid #1a237e' }}>
-            <FormControl size="small" sx={{ width: 200 }}>
+          <Paper sx={{ p: 2, mb: 2 }}>
+            <FormControl size="small" sx={{ width: 250 }}>
               <Select value={s} onChange={(e) => setS(e.target.value)}>
                 <MenuItem value='All'>All Statuses</MenuItem>
                 <MenuItem value='Operational'>Operational</MenuItem>
@@ -112,9 +113,9 @@ export default function App() {
           </Paper>
         </Collapse>
 
-        {/* TABLE - High Density style from screenshot */}
-        <TableContainer component={Paper} sx={{ borderRadius: 2, boxShadow: 'none', border: '1px solid #eee' }}>
-          <Table size="medium">
+        {/* TABLE - With the Location Pin Icon */}
+        <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
+          <Table>
             <TableHead sx={{ bgcolor: '#fafafa' }}>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold' }}>Plant Details</TableCell>
@@ -126,14 +127,14 @@ export default function App() {
             </TableHead>
             <TableBody>
               {filtered.map((r: any) => (
-                <TableRow key={r.id} hover sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableRow key={r.id} hover>
                   <TableCell>
                     <Typography variant="body2" sx={{ fontWeight: 'bold', color: '#1a237e' }}>{r.name}</Typography>
                     <Typography variant="caption" color="textSecondary">ID: #{r.id}</Typography>
                   </TableCell>
                   <TableCell>
                     <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                       <Box component="span" sx={{ color: 'gray' }}>📍</Box> {r.location}
+                       <LocationOnIcon sx={{ color: 'gray', fontSize: 18 }} /> {r.location}
                     </Typography>
                   </TableCell>
                   <TableCell sx={{ fontWeight: 'bold' }}>{r.capacity_mw} MW</TableCell>
@@ -141,9 +142,8 @@ export default function App() {
                     <Chip 
                       label={r.status} 
                       size='small' 
-                      sx={{ fontWeight: 'bold', fontSize: '0.7rem' }}
-                      color={r.status === 'Operational' ? 'success' : 'warning'} 
-                      variant="soft"
+                      sx={{ fontWeight: 'bold' }}
+                      color={r.status === 'Operational' ? 'success' : r.status === 'Under Maintenance' ? 'warning' : 'error'} 
                     />
                   </TableCell>
                   <TableCell align='right'>
@@ -160,7 +160,7 @@ export default function App() {
 
       {/* ADD DIALOG */}
       <Dialog open={o} onClose={() => setO(false)}>
-        <DialogTitle sx={{ fontWeight: 'bold' }}>Register New Asset</DialogTitle>
+        <DialogTitle>Register New Asset</DialogTitle>
         <DialogContent>
           <Stack spacing={2} sx={{ mt: 1, width: 320 }}>
             <TextField label='Plant Name' size="small" onChange={(e) => setN({ ...n, name: e.target.value })} fullWidth />
@@ -175,4 +175,4 @@ export default function App() {
       </Dialog>
     </Box>
   );
-}
+}s
