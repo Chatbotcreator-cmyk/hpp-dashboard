@@ -1,5 +1,4 @@
 import axios from 'axios';
-import type { PowerPlant, WeeklyProduction } from './types';
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 
@@ -8,9 +7,8 @@ const api = axios.create({
 });
 
 export const hppApi = {
-  // Matches prefix="/plants" in your main.py
-  getPlants: () => api.get<PowerPlant[]>('/plants').then(res => res.data),
-  
-  // Matches prefix="/production" in your main.py
-  getProduction: () => api.get<WeeklyProduction[]>('/production').then(res => res.data),
+  getPlants: () => api.get('/plants').then(res => res.data),
+  addPlant: (data: any) => api.post('/plants', data).then(res => res.data),
+  deletePlant: (id: number) => api.delete(`/plants/${id}`).then(res => res.data),
+  getProduction: () => api.get('/production').then(res => res.data),
 };
