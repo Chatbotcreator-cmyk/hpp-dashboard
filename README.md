@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+HPP Fleet Operations Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a monitoring and management interface for Hydroelectric Power Plant (HPP) assets. It consists of a React frontend and a Python FastAPI backend to handle data visualization and asset control.
 
-Currently, two official plugins are available:
+## Project Overview
+The application allows users to monitor generation capacity and manage plant data through a web interface. The frontend is built with React 19 and Material UI, while the backend utilizes FastAPI for a lightweight, high-performance REST API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Current Hosting Status
+The frontend is currently deployed on GitHub Pages:
+https://Chatbotcreator-cmyk.github.io/hpp-dashboard/
 
-## React Compiler
+Important: Because the backend is hosted locally, the live dashboard will only display data when the local Python server is running on the viewing machine.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Technical Specifications
+- Frontend: React 19, TypeScript, Vite, TanStack Query, Material UI.
+- Backend: Python 3.x, FastAPI, Uvicorn.
+- Data Management: Axios for API requests and React-CSV for data export.
 
-## Expanding the ESLint configuration
+Installation and Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Backend Configuration
+Navigate to the directory containing the Python API and install the necessary requirements:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+pip install fastapi uvicorn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+To start the server, run:
+uvicorn main:app --reload
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The API will run at http://127.0.0.1:8000. You can view the raw JSON data at the /plants endpoint.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Frontend Configuration
+Navigate to the hpp-dashboard directory and install the project dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+To start the development environment:
+npm run dev
+
+The interface will be accessible at http://localhost:5173/hpp-dashboard/.
+
+Deployment Instructions
+This repository is configured to deploy the production build to the gh-pages branch. 
+
+To push updates to the live site:
+1. Ensure the homepage field in package.json is correct.
+2. Execute the deployment script:
+   npm run deploy
+
+Academic Context
+This project was developed to demonstrate full-stack integration, specifically focusing on connecting a React-based UI with a Python backend and managing asynchronous state updates.
+
+Developer: Avyan
