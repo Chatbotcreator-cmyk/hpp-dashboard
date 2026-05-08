@@ -50,3 +50,4 @@ Academic Context
 This project was developed to demonstrate full-stack integration, specifically focusing on connecting a React-based UI with a Python backend and managing asynchronous state updates.
 
 Developer: Avyan
+<img width="1908" height="972" alt="image" src="https://github.com/user-attachments/assets/7ade0c06-62a4-497f-8db8-222c0790d318" />
