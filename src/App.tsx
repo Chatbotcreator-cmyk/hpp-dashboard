@@ -67,7 +67,7 @@ export default function App() {
       </Box>
 
       <Container sx={{ mt: 4 }} maxWidth={false}>
-        {/* KPI CARDS - Restoration of Bolt & Water icons */}
+        {/* KPI CARDS */}
         <Stack direction="row" spacing={3} sx={{ mb: 4 }}>
           <Card sx={{ minWidth: 280, borderRadius: 2 }}>
             <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -113,7 +113,7 @@ export default function App() {
           </Paper>
         </Collapse>
 
-        {/* TABLE - Restoration of the Flow Rate column and Pin icon */}
+        {/* TABLE */}
         <TableContainer component={Paper} sx={{ borderRadius: 2, boxShadow: 'none', border: '1px solid #eee' }}>
           <Table>
             <TableHead sx={{ bgcolor: '#fafafa' }}>
@@ -125,7 +125,7 @@ export default function App() {
                 <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
                 <TableCell align='right'></TableCell>
               </TableRow>
-            </Head>
+            </TableHead>
             <TableBody>
               {filtered.map((r: any) => (
                 <TableRow key={r.id} hover>
