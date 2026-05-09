@@ -1,9 +1,6 @@
 HPP Fleet Operations Dashboard (Frontend)
-This repository contains the React-based frontend for the Hydroelectric Power Plant (HPP) management system. It provides a professional interface to visualize data provided by the HPP Mock API.
 
-Live Deployment
-The dashboard is hosted via GitHub Pages:
-https://Chatbotcreator-cmyk.github.io/hpp-dashboard/
+This repository contains the React-based frontend for the Hydroelectric Power Plant (HPP) management system. It provides a professional interface to visualize data provided by the HPP Mock API.
 
 Relationship with Backend
 This project requires the HPP Mock API to be running to display data. The backend source code is located in a separate repository:
